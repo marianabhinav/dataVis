@@ -1,11 +1,14 @@
 {
   "name": "data-vis-2-assignment",
   "version": "0.1.0",
+  "homepage": "https://marianabhinav.github.io/dataVis/",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
     "eslint": "eslint -c .eslintrc.js 'src/**/*.js'",
-    "eslint-fix": "eslint -c .eslintrc.js 'src/**/*.js' --fix"
+    "eslint-fix": "eslint -c .eslintrc.js 'src/**/*.js' --fix",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.2",
@@ -24,6 +27,7 @@
     "bootstrap-slider": "^10.6.1",
     "d3": "^5.9.2",
     "fs.js": "*",
+    "gh-pages": "^3.1.0",
     "jquery": "^3.4.0",
     "numeric": "^1.2.6",
     "popper.js": "*",
