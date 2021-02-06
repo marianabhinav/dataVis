@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Data Visualization: Assignment</title>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+    </style>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://d3js.org/d3.v5.js"></script>
+</head>
+
+<body>
+<div id="ui" class="container">
+    <br>
+    <h1 style="text-align: center">Assignment: Abhinav Mittal & Mohnish Deshpande</h1>
+    <br>
+    <nav>
+        <ul class="nav nav-tabs" id="navTabs" role="tablist">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" id="scatterplot-tab" href="#scatterplot" role="tab" aria-controls="scatterplot" aria-selected="true">Scatterplot</a> </li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" id="scatterplotMatrix-tab" href="#scatterplotMatrix" role="tab" aria-controls="scatterplotMatrix" aria-selected="false">Scatterplot Matrix</a> </li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" id="pcp-tab" href="#pcp" role="tab" aria-controls="pcp" aria-selected="false">PCP</a> </li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" id="tSne-tab" href="#tSne" role="tab" aria-controls="tSne" aria-selected="false">t-SNE</a> </li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" id="mds-tab" href="#mds" role="tab" aria-controls="mds" aria-selected="false">MDS</a> </li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" id="hilbert-tab" href="#hilbert" role="tab" aria-controls="hilbert" aria-selected="false">Hilbert</a> </li>
+            <a class="btn btn-secondary dropdown-toggle ml-auto" role="button" id="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Datasets...
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdown"></div>
+        </ul>
+    </nav>
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="scatterplot-tab" id="scatterplot">
+            <a class="btn btn-outline-primary btn-sm disabled" role="button" aria-disabled="true" id="showMst">Show MST</a>
+            <div id=scatterplot-vis></div>
+        </div>
+        <div class="tab-pane fade" role="tabpanel" aria-labelledby="scatterplotMatrix-tab" id="scatterplotMatrix">
+            <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                <a class="btn btn-outline-primary btn-sm disabled" role="button" aria-disabled="true" id="matshowMst">Show MST</a>
+                <div>
+                    <label for="scaleOutMeasure" id="outlyinText" style="display: none;"></label>
+                </div>
+                <div id="sliderContainer" style="display: none;">    
+                    <input type="range" id="scaleOutMeasure">
+                </div>
+            </div>
+            <div id=scatterplotMatrix-vis></div>
+        </div>
+        <div class="tab-pane fade" role="tabpanel" aria-labelledby="pcp-tab" id="pcp">
+            <form>
+                <div class="form-group row align-items-center my-0">
+                    <label for="alphaSlider" class="col-sm-2 col-form-label" id="alpha" style="display: none;">α: 0</label>
+                    <div class="col-sm-5">
+                        <input type="range" min="0" max="0.25" step="0.01" value="0" class="form-control-range" id="alphaSlider" style="display: none;">
+                    </div>
+                </div>   
+                <div class="form-group row align-items-center my-0">
+                    <label for="betaSlider" class="col-sm-2 col-form-label" id="beta" style="display: none;">β: 0</label>
+                    <div class="col-sm-5">
+                        <input type="range" min="0" max="1" step="0.01" value="0" class="form-control-range" id="betaSlider"  style="display: none;">
+                    </div>
+                </div>
+            </form>    
+            <div id=pcp-vis></div>
+        </div>
+        <div class="tab-pane fade" role="tabpanel" aria-labelledby="tSne-tab" id="tSne">
+            <form>
+                    <div class="form-group row align-items-center my-0">
+                        <label for="iterationSlider" class="col-sm-2 col-form-label" id="iteration" style="display: none;">Iterations: 100</label>
+                        <div class="col-sm-5">
+                            <input type="range" min=100 max=1000 step=1 value=0 class="form-control-range" id="iterationSlider" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center my-0">
+                        <label for="lrateSlider" class="col-sm-2 col-form-label" id="lrate" style="display: none;">ε: 1</label>
+                        <div class="col-sm-5">
+                            <input type="range" min=1 max=1000 step=1 value=0 class="form-control-range" id="lrateSlider" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <label for="perplexitySlider" class="col-sm-2 col-form-label" id="perplexity" style="display: none;">Perplexity: 5</label>
+                        <div class="col-sm-5">
+                            <input type="range" min=5 max=50 step=1 value=0 class="form-control-range" id="perplexitySlider" style="display: none;">
+                        </div>
+                    </div>
+                    <a class="btn btn-outline-primary btn-sm disabled" role="button" aria-disabled="true" id="project">Project</a>
+              </form>
+            <div id=tSne-vis></div>
+        </div>
+        <div class="tab-pane fade" role="tabpanel" aria-labelledby="mds-tab" id="mds">
+            <div id=mds-vis></div>
+        </div>
+        <div class="tab-pane fade" role="tabpanel" aria-labelledby="hilbert-tab" id="hilbert">
+            <div id=hilbert-vis></div>
+        </div>
+    </div>
+
+</body>
+
+</html>
