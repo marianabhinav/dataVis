@@ -85,3 +85,7 @@ This folder contains static assets for your project.
 __Its content is copied _as-is_ to the root folder of your project.__
 Currently, it only includes the folder `datasets`.
 Therefore, you can access them as `datasets/{dataset-name}.csv` in your project.
+
+### `Github Pages link`
+
+https://marianabhinav.github.io/dataVis/
